@@ -1,0 +1,37 @@
+<div id="gameInfo" ng-if="gameData">
+  <h2>Guess the Phrase:</h2>
+  <h1 ng-model="gameData" class="phrase">{{gameData.phrase}}</h1>
+
+  <div class="animate-switch-container" ng-switch on="gameData.state">
+    <div class="animate-switch won" ng-switch-when="won">
+      <h1> Hooray, you're a big winner. </h1>
+    </div>
+    <div class="animate-switch lost" ng-switch-when="lost">
+      <h1> Womp womp, you ran out of guesses. Try again... </h1>
+    </div>
+    <div class="animate-switch" ng-switch-when="alive">
+      <form novalidate class="simple-form form-inline" id="guess-form">
+        <formset>
+          <div class="form-group">
+            <label for="guess">Enter Letter: </label>
+            <input id="guess" class="guess-input" type="text" maxlength="1" placeholder="?" ng-model="gameData.currentGuess"/>
+          </div>
+          <button class="btn btn-primary guess" ng-click="makeGuess(gameData.currentGuess)">Make Guess</button>
+        </formset>
+      </form>
+      <div ng-switch on="gameData.num_tries_left">
+        <div ng-switch-when="0">
+          <h3>Make another mistake and you die.</h3>
+        </div>
+        <div ng-switch-when="1">
+          <h3>You can only make one more mistake.</h3>
+        </div>
+        <div ng-switch-default>
+          <h3>You can make {{gameData.num_tries_left}} more mistakes.</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="btn btn-primary" ng-if="!gameData || gameData.state != 'alive'" ng-click="startNewGame()">Start New Game</button>

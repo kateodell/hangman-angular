@@ -1,0 +1,34 @@
+/* app css stylesheet */
+
+body {
+  color: white;
+  background-color: black;
+  font-family: 'Courier New';
+}
+
+.guess-input {
+  color: black;
+  width: 2em;
+  text-align: center;
+  font-size: 36px;
+}
+
+.btn {
+  font-size: 32px;
+}
+
+.phrase {
+  letter-spacing: 7px;
+  font-size: 70px;
+  border: 4px dashed yellow;
+  padding: 20px;
+  margin: 20px 50px;
+}
+
+.won {
+  color: chartreuse;
+}
+
+.lost {
+  color: red;
+}
