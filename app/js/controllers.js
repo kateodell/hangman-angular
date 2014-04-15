@@ -25,19 +25,23 @@ angular.module('hangman.controllers', []).
     $scope.makeGuess = function(letter) {
 
       console.log("guessing: " + letter);
-      $http.jsonp("http://hangman.coursera.org/hangman/game/" + $scope.gameData.game_key + "?callback=JSON_CALLBACK",
-        { params: {
-            data: {"guess": letter}
-          }
+      if(letter && letter.match(/[a-zA-Z]+/)){
+        $http.jsonp("http://hangman.coursera.org/hangman/game/" + $scope.gameData.game_key + "?callback=JSON_CALLBACK",
+          { params: {
+              data: {"guess": letter}
+            }
+          })
+          .success(function(data) {
+            $scope.gameData = data;
+            console.log($scope.gameData);
         })
-        .success(function(data) {
-      		$scope.gameData = data;
-      		console.log($scope.gameData);
-          $scope.checkGameOver();
-      })
-        .error(function(data) {
-      	console.log('Error: ' + data);
-      });
+          .error(function(data) {
+          console.log('Error: ' + data);
+        });
+      } else {
+        alert ("You must enter a single letter (a-z)!")
+      }
+
     };
 
     $scope.noCurrentGame = function() {

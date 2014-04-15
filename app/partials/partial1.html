@@ -16,7 +16,7 @@
             <label for="guess">Enter Letter: </label>
             <input id="guess" class="guess-input" type="text" maxlength="1" placeholder="?" ng-model="gameData.currentGuess"/>
           </div>
-          <button class="btn btn-primary guess" ng-click="makeGuess(gameData.currentGuess)">Make Guess</button>
+          <button id="make-guess" class="btn btn-primary guess" ng-click="makeGuess(gameData.currentGuess)">Make Guess</button>
         </formset>
       </form>
       <div ng-switch on="gameData.num_tries_left">
@@ -34,4 +34,4 @@
   </div>
 </div>
 
-<button class="btn btn-primary" ng-if="!gameData || gameData.state != 'alive'" ng-click="startNewGame()">Start New Game</button>
+<button class="btn btn-primary" id="start-game" ng-if="!gameData || gameData.state != 'alive'" ng-click="startNewGame()">Start New Game</button>
